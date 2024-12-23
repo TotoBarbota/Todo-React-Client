@@ -1,0 +1,18 @@
+
+.button-add{
+    font-size: 40px;
+    width: 100px;
+    background-color: rgb(186, 228, 124);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
+
+.button-subract{
+    font-size: 40px;
+    width: 100px;
+    background-color: rgb(255, 67, 67);
+    border-radius: 10px;
+    padding: 10px;
+    margin: 10px;
+}
