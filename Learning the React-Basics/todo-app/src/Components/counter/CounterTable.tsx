@@ -6,7 +6,7 @@ export type CounterProps = {
     setCounter: Function;
 }
 
-export default function Counter(CounterProps: CounterProps) {
+export default function CounterTable(CounterProps: CounterProps) {
     
     function incrementMethod(incrementValue: number) {
         CounterProps.setCounter(CounterProps.counter + incrementValue)

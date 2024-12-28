@@ -1,11 +1,11 @@
-import CounterWraper from './Components/counter/CounterWraper'
 import './App.css'
+import TodoApp from './Components/todo/TodoApp'
 
 function App() {
 
   return (
     <>
-      <CounterWraper />      
+      <TodoApp />      
     </>
   )
 }
