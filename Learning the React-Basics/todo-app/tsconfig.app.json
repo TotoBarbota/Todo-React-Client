@@ -15,9 +15,12 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+    "checkJs": false,   // Optional: prevents TypeScript from reporting errors in .jsx files
 
     /* Linting */
     "strict": true,
+    "allowJs": true,
+    "allowSyntheticDefaultImports": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,

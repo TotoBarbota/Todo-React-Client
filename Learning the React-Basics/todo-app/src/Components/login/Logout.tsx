@@ -1,6 +1,4 @@
 export default function LogoutPage() {
-
-    
     return (
         <div className="logout">
             <h1>You are logged out!</h1>

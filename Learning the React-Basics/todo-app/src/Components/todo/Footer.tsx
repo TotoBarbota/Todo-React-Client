@@ -1,6 +1,10 @@
 import './Footer.css'
+import { useAuth } from "../security/AuthContex";
 
 export default function Footer() {
+    const authContext = useAuth()
+    console.log(authContext);
+
     return(
         <footer className="footer border-top border-light border-5 p-2 mt-5">
             <div className="container">

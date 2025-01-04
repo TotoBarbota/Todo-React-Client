@@ -1,31 +1,59 @@
 import LoginPage from "../login/LoginPage";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import WelcomePage from "./WelcomePage";
 import ErrorPage from "./ErrorPage";
 import CounterWraper from "../counter/CounterWraper";
 import TodoList from "./TodoList";
 import Header from "./Header";
 import Footer from "./Footer";
-import LogoutPage from "../login/LogoutPage";
+import LogoutPage from "../login/Logout";
+import AuthProvider, { useAuth } from "../security/AuthContex";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 export default function TodoApp() {
+
+    function AuthenticatedRoute({ children: children }: any) {
+        const authContext = useAuth()
+        if (authContext.isAuthenticated) {
+            return children
+        }
+        return <Navigate to="/" />
+    }
+
     return (
         <div className="todo-app">
-            <BrowserRouter>
-                <Header/>
-                <Routes>
-                    <Route path="/" element={<LoginPage />} />
-                    <Route path="/login" element={<LoginPage />} />
-                    <Route path="/logout" element={<LogoutPage />} />
-                    <Route path="/welcome/:username" element={<WelcomePage />} />
-                    <Route path="/counter" element={<CounterWraper />} />
-                    <Route path="/todos" element={<TodoList />} />
-
-                    <Route path='*' element={<ErrorPage />} />
-                </Routes>
-                <Footer/>
-            </BrowserRouter>
+            <AuthProvider>
+                <BrowserRouter>
+                    <Header/>
+                    <Routes>
+                        <Route path="/" element={<LoginPage />} />
+                        <Route path="/login" element={<LoginPage />} />
+                        
+                        <Route path="/logout" element={
+                            <AuthenticatedRoute>
+                                <LogoutPage />
+                            </AuthenticatedRoute>
+                        } />
+                        <Route path="/welcome/:username" element={
+                            <AuthenticatedRoute>
+                                <WelcomePage />
+                            </AuthenticatedRoute>
+                        } />
+                        <Route path="/counter" element={
+                            <AuthenticatedRoute>
+                                <CounterWraper />
+                            </AuthenticatedRoute>
+                        } />
+                        <Route path="/todos" element={
+                            <AuthenticatedRoute>
+                                <TodoList />
+                            </AuthenticatedRoute>
+                            } />
+                        <Route path='*' element={<ErrorPage />} />
+                    </Routes>
+                    <Footer/>
+                </BrowserRouter>
+            </AuthProvider>
         </div>
     );
 }
