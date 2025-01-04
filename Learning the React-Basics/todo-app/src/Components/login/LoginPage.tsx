@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import "./LoginPage.css"
 
 export default function LoginPage() {
     const [username, setUsername] = useState("Toto")
@@ -16,7 +17,7 @@ export default function LoginPage() {
         if (username === "Toto" && password === "emeis2002") {
             setAuthenticationSuccess(true)
             setAuthenticationFailed(false)
-            navigate('/welcome')
+            navigate(`/welcome/${username}`)
 
         } else {
             setAuthenticationSuccess(false)
@@ -49,7 +50,7 @@ export default function LoginPage() {
                             }
                         } />
                 </form>
-                <button type="submit" onClick={checkSubmit}>Login</button>
+                <button type="submit" onClick={checkSubmit} onSubmit={checkSubmit}>Login</button>
             </div>
         </div>
     );
