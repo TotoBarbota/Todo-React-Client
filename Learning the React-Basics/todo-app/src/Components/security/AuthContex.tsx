@@ -25,7 +25,7 @@ export default function AuthProvider({ children }: any) {
     function login(username: string, password: string) {
         // console.log(username)
         // console.log(password)
-        if (username === "Toto" && password === "emeis2002") {
+        if (username === "Toto" || username === "Tini" && password === "dummy") {
             setUsername(username)
             setAuthenticated(true)
             return true

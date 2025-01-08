@@ -1,25 +1,32 @@
-import { Link, useParams } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useAuth } from "../security/AuthContex";
-import axios from "axios";
 import { useState } from "react";
+import { retrieveHelloWorldBeanWithPathVariable } from "../api/helloWorldAPI";
 
 export default function WelcomePage() {
 
-    const {username} = useParams();
     const [message, setMessage] = useState('')
 
-    console.log(username);
 
     const authContext = useAuth()
-    
+
     function callHelloWorldAPI() {
-        axios.get('http://localhost:8080/hello-world-bean')
+        // axios.get('http://localhost:8080/hello-world-bean')
+        //     .then(response => successfulResponse(response))
+        //     .catch(error => errorResponce(error))
+        //     .finally( () => console.log('cleanup'))
+
+        retrieveHelloWorldBeanWithPathVariable(authContext.username)
             .then(response => successfulResponse(response))
             .catch(error => errorResponce(error))
             .finally( () => console.log('cleanup'))
+        
     }
+
+    
     
     function successfulResponse(response: any) {
+        console.log(response.data.message)
         setMessage(response.data.message)
     }
 
@@ -30,7 +37,7 @@ export default function WelcomePage() {
 
     return (
         <div className="welcome-page">
-            <h2>WELCOME TO THE TODO APP {username}</h2>
+            <h2>WELCOME TO THE TODO APP {authContext.username}</h2>
             <div>
                 <p>This is the welcome page. </p>
                 <p>Here you can see your todos. - <Link to="/todos">Todos</Link></p>
