@@ -13,8 +13,8 @@ export default function LoginPage() {
   const navigate = useNavigate();
   const authContext = useAuth();
 
-  function checkSubmit(values: any) {
-    if (authContext.login(values.username, values.password)) {
+  async function checkSubmit(values: any) {
+    if (await authContext.login(values.username, values.password)) {
       setAuthenticationFailed(false);
       navigate(`/welcome`);
     } else {

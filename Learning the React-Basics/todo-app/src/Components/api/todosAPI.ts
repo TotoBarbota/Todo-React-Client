@@ -1,9 +1,5 @@
-import axios from "axios";
 import { Todo } from "../todo/TodoList";
-
-const apiClient = axios.create({
-  baseURL: "http://localhost:8080",
-});
+import { apiClient } from "./apiClient";
 
 export function retrieveAllTodosApi(username: string) {
   return apiClient.get(`/users/${username}/todos`);

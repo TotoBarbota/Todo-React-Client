@@ -1,16 +1,9 @@
-import axios from "axios";
-
-const apiAxios = axios.create(
-    {
-        baseURL: 'http://localhost:8080'
-    }
-)
+import { apiClient } from "./apiClient";
 
 export function retrieveHelloWorldBean() {
-    return apiAxios.get('/hello-world-bean')
+  return apiClient.get("/hello-world-bean");
 }
 
 export function retrieveHelloWorldBeanWithPathVariable(name: string) {
-    return apiAxios.get(`/hello-world/path-variable/${name}`)
+  return apiClient.get(`/hello-world/path-variable/${name}`);
 }
-

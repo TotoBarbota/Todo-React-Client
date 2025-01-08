@@ -7,7 +7,7 @@ import {
   updateTodoApi,
 } from "../api/todosAPI";
 import { useAuth } from "../security/AuthContex";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export interface Todo {
   id: number;
@@ -20,8 +20,7 @@ export interface Todo {
 export default function TodoList() {
   const [todos, setTodos] = useState<Todo[]>([]);
   const [message, setMessage] = useState<String | null>(null);
-  const [messageClass, setMessageClass] = useState("alert alert-danger");
-  const [newTodo, setNewTodo] = useState<Todo>();
+  const [messageClass, setMessageClass] = useState("");
 
   const authContext = useAuth();
   const navigate = useNavigate();
@@ -50,7 +49,8 @@ export default function TodoList() {
   function deleteTodo(id: number) {
     deleteTodoApi(authContext.username, id)
       .then((response) => {
-        setMessage(`Deleted TODO ${response.data.id}`);
+        setMessage(`Deleted TODO ${id}`);
+        setMessageClass("alert alert-success");
         refreshTodos();
       })
       .catch((error) => {
